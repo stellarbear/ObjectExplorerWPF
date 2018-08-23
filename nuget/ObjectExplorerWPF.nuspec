@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>ObjectExplorerWPF</id>
+    <version>1.0</version>
+    <title>ObjectExplorerWPF</title>
+    <authors>stellarbears</authors>
+    <owners>stellarbears</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/stellarbear/ObjectExplorerWPF</licenseUrl>
+    <projectUrl>https://github.com/stellarbear/ObjectExplorerWPF</projectUrl>
+    <description>Just a bunch of useful methods</description>
+    <copyright>stellarbears</copyright>
+    <tags>dialog explorer wpf csharp net</tags>
+    <dependencies>
+      <dependency id="AlphaFS" version="2.2.0" />
+      <dependency id="MaterialSharp" version="0.1.0" />
+      <dependency id="AuxiliarySharp" version="0.3.0" />
+      <dependency id="Newtonsoft.Json" version="10.0.0" />
+	  <dependency id="Microsoft.Bcl.Async" version="1.0.16" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Release\**\ObjectExplorerWPF.dll" target="build/net" />
+    <file src="Release\**\ObjectExplorerWPF.props" target="build/net" />
+</files>
+</package>
