@@ -9,7 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <licenseUrl>https://github.com/stellarbear/ObjectExplorerWPF</licenseUrl>
     <projectUrl>https://github.com/stellarbear/ObjectExplorerWPF</projectUrl>
-    <description>Just a bunch of useful methods</description>
+    <description>Custom file/folder explorer control for WPF </description>
     <copyright>stellarbears</copyright>
     <tags>dialog explorer wpf csharp net</tags>
     <dependencies>
