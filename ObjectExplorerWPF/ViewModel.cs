@@ -6,7 +6,7 @@ namespace ObjectExplorerWPF
     {
         public Explorer Explorer { get; set; }
 
-        public ViewModel(IEnumerable<string> dirs, ESelectionRestrictions type, string filter = "*")
+        public ViewModel(IEnumerable<string> dirs, ESelectionRestrictions type, string filter)
         {
             Explorer = new Explorer(dirs, type, filter);
         }

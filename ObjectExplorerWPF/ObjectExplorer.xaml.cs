@@ -26,15 +26,17 @@ namespace ObjectExplorerWPF
             }
         }
 
+        private string filter;
         private ESelectionRestrictions type;
         private IEnumerable<string> _selectedObjects;
 
 
-        public ObjectExplorer(IEnumerable<string> dirs, ESelectionRestrictions type, string title = "Выбор объектов")
+        public ObjectExplorer(IEnumerable<string> dirs, ESelectionRestrictions type, string filter = "*", string title = "Выбор объектов")
         {
             this.type = type;
+            this.filter = filter;
             _selectedObjects = new List<string>();
-            DataContext = new ViewModel(dirs, type);
+            DataContext = new ViewModel(dirs, type, filter);
 
             InitializeComponent();
             LTitle.Content = title;
@@ -91,7 +93,7 @@ namespace ObjectExplorerWPF
                     IEnumerable<string> dirs = Directory.GetDirectories(path);
                     IEnumerable<string> files = Directory.GetFiles(path);
 
-                    DataContext = new ViewModel(dirs.Concat(files), type);
+                    DataContext = new ViewModel(dirs.Concat(files), type, filter);
                 }
             }
             catch (Exception ex)
