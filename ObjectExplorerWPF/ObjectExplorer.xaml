@@ -1,0 +1,92 @@
+﻿<Window x:Class="ObjectExplorerWPF.ObjectExplorer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ObjectExplorerWPF"
+      xmlns:converters="clr-namespace:ObjectExplorerWPF.Converters"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner" WindowStyle="None" ResizeMode="CanResize"
+             Height="400" Width="400">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialSharp;component/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialSharp;component/Defaults.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:BoolToSizeConverter x:Key="BoolToSizeConverter"/>
+            <converters:SelectionRestrictionToCheckBoxConverter x:Key="SelectionRestrictionToCheckBoxConverter"/>
+            <converters:SelectionRestrictionToRadioButtonConverter x:Key="SelectionRestrictionToRadioButtonConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel Background="White">
+        <DockPanel Margin="4" DockPanel.Dock="Top" Background="Transparent" HorizontalAlignment="Stretch" >
+            <Label FontSize="12" Name="LTitle" VerticalAlignment="Center" Margin="12 -4 0 0" />
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource Close}" Click="CloseButton_Click" Opacity="0.46" Margin="0 0 6 0"/>
+            </StackPanel>
+        </DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TreeView Grid.Row="0" Name="TVExplorer" ItemsSource="{Binding Explorer.Nodes}"
+                      TreeViewItem.Expanded="TreeViewItem_Expanded">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Nodes}" >
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <Grid Margin="-20 0 0 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Grid.Column="0" Margin="2" VerticalAlignment="Center" IsChecked="{Binding IsChecked}">
+                                        <CheckBox.Visibility>
+                                            <MultiBinding Converter="{StaticResource SelectionRestrictionToCheckBoxConverter}">
+                                                <Binding Path="SelectionRestrictions"/>
+                                                <Binding Path="IsDirectory"/>
+                                            </MultiBinding>
+                                        </CheckBox.Visibility>
+                                    </CheckBox>
+                                    <RadioButton Grid.Column="0" Margin="0 2 4 2" VerticalAlignment="Center" IsChecked="{Binding IsChecked}"
+                                                 GroupName="radioGroup">
+                                        <RadioButton.Visibility>
+                                            <MultiBinding Converter="{StaticResource SelectionRestrictionToRadioButtonConverter}">
+                                                <Binding Path="SelectionRestrictions"/>
+                                                <Binding Path="IsDirectory"/>
+                                            </MultiBinding>
+                                        </RadioButton.Visibility>
+                                    </RadioButton>
+
+                                    <Image Grid.Column="1" Source="{Binding Icon}" 
+                                           Width="{Binding IsDirectory, Converter={StaticResource BoolToSizeConverter}}" 
+                                           Height="{Binding IsDirectory, Converter={StaticResource BoolToSizeConverter}}"/>
+
+                                    <Label Grid.Column="2" Content="{Binding Name}"/>
+                                </Grid>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <Label Foreground="Red" Grid.Row="1" Margin="0 0 0 -10" Name="LError"/>
+            <Grid Grid.Row="2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Style="{StaticResource FolderMove}" ToolTip="Перейти к директории" Click="GotToPath_Click"/>
+                <Button Grid.Column="1" Style="{StaticResource FolderPlus}" ToolTip="Добавить директорию" Click="AddPath_Click"/>
+                <TextBox Grid.Column="2" Name="TBAdditionalPath"/>
+            </Grid>
+            <Button Style="{StaticResource MRaisedButton}" Grid.Row="3" Name="BAccept" Content="Выбрать объекты" Margin="0 8 0 0" Click="BAccept_Click"/>
+        </Grid>
+    </DockPanel>
+</Window>
