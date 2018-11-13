@@ -36,40 +36,36 @@
             <TreeView Grid.Row="0" Name="TVExplorer" ItemsSource="{Binding Explorer.Nodes}"
                       TreeViewItem.Expanded="TreeViewItem_Expanded">
                 <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Nodes}" >
-                        <TreeViewItem>
-                            <TreeViewItem.Header>
-                                <Grid Margin="-20 0 0 0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <CheckBox Grid.Column="0" Margin="0 2 4 2" VerticalAlignment="Center" IsChecked="{Binding IsChecked}">
-                                        <CheckBox.Visibility>
-                                            <MultiBinding Converter="{StaticResource SelectionRestrictionToCheckBoxConverter}">
-                                                <Binding Path="SelectionRestrictions"/>
-                                                <Binding Path="IsDirectory"/>
-                                            </MultiBinding>
-                                        </CheckBox.Visibility>
-                                    </CheckBox>
-                                    <RadioButton Grid.Column="0" Margin="0 2 4 2" VerticalAlignment="Center" IsChecked="{Binding IsChecked}"
+                    <HierarchicalDataTemplate ItemsSource="{Binding Nodes}" DataType="{x:Type TreeViewItem}">
+                        <Grid Margin="-20 0 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox Grid.Column="0" Margin="0 2 4 2" VerticalAlignment="Center" IsChecked="{Binding IsChecked}">
+                                <CheckBox.Visibility>
+                                    <MultiBinding Converter="{StaticResource SelectionRestrictionToCheckBoxConverter}">
+                                        <Binding Path="SelectionRestrictions"/>
+                                        <Binding Path="IsDirectory"/>
+                                    </MultiBinding>
+                                </CheckBox.Visibility>
+                            </CheckBox>
+                            <RadioButton Grid.Column="0" Margin="0 2 4 2" VerticalAlignment="Center" IsChecked="{Binding IsChecked}"
                                                  GroupName="radioGroup">
-                                        <RadioButton.Visibility>
-                                            <MultiBinding Converter="{StaticResource SelectionRestrictionToRadioButtonConverter}">
-                                                <Binding Path="SelectionRestrictions"/>
-                                                <Binding Path="IsDirectory"/>
-                                            </MultiBinding>
-                                        </RadioButton.Visibility>
-                                    </RadioButton>
+                                <RadioButton.Visibility>
+                                    <MultiBinding Converter="{StaticResource SelectionRestrictionToRadioButtonConverter}">
+                                        <Binding Path="SelectionRestrictions"/>
+                                        <Binding Path="IsDirectory"/>
+                                    </MultiBinding>
+                                </RadioButton.Visibility>
+                            </RadioButton>
 
-                                    <Image Grid.Column="1" Source="{Binding Icon}" VerticalAlignment="Center"
+                            <Image Grid.Column="1" Source="{Binding Icon}" VerticalAlignment="Center"
                                            Width="24" Height="24"/>
 
-                                    <Label Grid.Column="2" Content="{Binding Name}"/>
-                                </Grid>
-                            </TreeViewItem.Header>
-                        </TreeViewItem>
+                            <Label Grid.Column="2" Content="{Binding Name}"/>
+                        </Grid>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
