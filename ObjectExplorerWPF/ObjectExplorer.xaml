@@ -73,7 +73,7 @@
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
-            <Label Foreground="Red" Grid.Row="1" Margin="0 0 0 -10" Name="LError"/>
+            <Label Foreground="Red" Grid.Row="1" Margin="0 0 0 -8" Name="LError"/>
             <Grid Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
