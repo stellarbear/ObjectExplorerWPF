@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Alphaleonis.Win32.Filesystem;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -41,7 +42,10 @@ namespace ObjectExplorerWPF
         }
         public void AppendNode(string path)
         {
-            Nodes.Add(new ExplorerNode(path, SelectionRestrictions, Filter));
+            if (Directory.Exists(path) || File.Exists(path))
+            {
+                Nodes.Add(new ExplorerNode(path, SelectionRestrictions, Filter));
+            }
         }
         private Regex WildCardToRegular(string filter)
         {
@@ -135,14 +139,18 @@ namespace ObjectExplorerWPF
                 }
             }
         }
+        public void ClearNode()
+        {
+            Nodes.Clear();
+        }
         public IEnumerable<string> GetCheckedNodes()
         {
             if (IsChecked)
                 yield return Path;
 
-            foreach(ExplorerNode node in Nodes)
+            foreach (ExplorerNode node in Nodes)
             {
-                foreach(string path in node.GetCheckedNodes())
+                foreach (string path in node.GetCheckedNodes())
                     yield return path;
             }
         }

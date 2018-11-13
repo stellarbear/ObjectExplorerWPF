@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ObjectExplorerWPF"
       xmlns:converters="clr-namespace:ObjectExplorerWPF.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner" WindowStyle="None" ResizeMode="CanResize"
-             Height="400" Width="400">
+             Height="400" Width="420">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,7 +15,6 @@
 
             </ResourceDictionary.MergedDictionaries>
 
-            <converters:BoolToSizeConverter x:Key="BoolToSizeConverter"/>
             <converters:SelectionRestrictionToCheckBoxConverter x:Key="SelectionRestrictionToCheckBoxConverter"/>
             <converters:SelectionRestrictionToRadioButtonConverter x:Key="SelectionRestrictionToRadioButtonConverter"/>
         </ResourceDictionary>
@@ -46,7 +45,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <CheckBox Grid.Column="0" Margin="2" VerticalAlignment="Center" IsChecked="{Binding IsChecked}">
+                                    <CheckBox Grid.Column="0" Margin="0 2 4 2" VerticalAlignment="Center" IsChecked="{Binding IsChecked}">
                                         <CheckBox.Visibility>
                                             <MultiBinding Converter="{StaticResource SelectionRestrictionToCheckBoxConverter}">
                                                 <Binding Path="SelectionRestrictions"/>
@@ -64,9 +63,8 @@
                                         </RadioButton.Visibility>
                                     </RadioButton>
 
-                                    <Image Grid.Column="1" Source="{Binding Icon}" 
-                                           Width="{Binding IsDirectory, Converter={StaticResource BoolToSizeConverter}}" 
-                                           Height="{Binding IsDirectory, Converter={StaticResource BoolToSizeConverter}}"/>
+                                    <Image Grid.Column="1" Source="{Binding Icon}" VerticalAlignment="Center"
+                                           Width="24" Height="24"/>
 
                                     <Label Grid.Column="2" Content="{Binding Name}"/>
                                 </Grid>

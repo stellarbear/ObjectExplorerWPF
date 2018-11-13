@@ -124,7 +124,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\BoolToSizeConverter.cs" />
     <Compile Include="Converters\SelectionRestrictionConverter.cs" />
     <Compile Include="Explorer.cs" />
     <Compile Include="ViewModel.cs" />

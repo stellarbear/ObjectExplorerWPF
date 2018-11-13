@@ -104,7 +104,15 @@ namespace ObjectExplorerWPF
 
         private async void TreeViewItem_Expanded(object sender, RoutedEventArgs e)
         {
-            await ((e.OriginalSource as TreeViewItem).DataContext as ExplorerNode).ExtendNodeAsync();
+            try
+            {
+                await ((e.OriginalSource as TreeViewItem).DataContext as ExplorerNode).ExtendNodeAsync();
+            }
+            catch (Exception ex)
+            {
+                LError.Content = ex.Message;
+                ((e.OriginalSource as TreeViewItem).DataContext as ExplorerNode).ClearNode();
+            }
         }
     }
 }

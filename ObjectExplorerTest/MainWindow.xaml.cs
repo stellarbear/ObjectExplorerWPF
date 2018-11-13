@@ -1,5 +1,7 @@
 ﻿using ObjectExplorerWPF;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Windows;
 
 namespace ObjectExplorerTest
@@ -13,7 +15,14 @@ namespace ObjectExplorerTest
         {
             InitializeComponent();
 
-            ObjectExplorer OE = new ObjectExplorer(new List<string> { @"D:\Test", @"D:\Test\log" }, ESelectionRestrictions.DirAndFileMultiple);
+            List<string> ObservableDirs = new List<string>();
+
+            ObservableDirs.Add(Path.Combine(AuxiliarySharp.IO.General.GetCurrentDirectory(), "results"));
+            ObservableDirs.AddRange(DriveInfo.GetDrives().
+                Where(x => x.DriveType == System.IO.DriveType.Fixed).
+                Select(x => x.Name));
+
+            ObjectExplorer OE = new ObjectExplorer(ObservableDirs, ESelectionRestrictions.DirAndFileMultiple);
             OE.ShowDialog();
         }
     }
