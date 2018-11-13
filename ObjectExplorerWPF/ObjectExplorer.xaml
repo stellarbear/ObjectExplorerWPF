@@ -37,7 +37,7 @@
                       TreeViewItem.Expanded="TreeViewItem_Expanded">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Nodes}" DataType="{x:Type TreeViewItem}">
-                        <Grid Margin="-20 0 0 0">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
